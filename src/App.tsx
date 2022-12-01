@@ -1,4 +1,11 @@
 import React from 'react';
+import { Amplify, API, graphqlOperation } from 'aws-amplify';
+import { createProject } from './graphql/mutations';
+import { listProjects } from './graphql/queries';
+
+import awsExports from './aws-exports';
+
+Amplify.configure(awsExports);
 
 import tmtnIMG from './assets/tmtn.png';
 import ghSVG from './assets/github.svg';
@@ -35,10 +42,10 @@ const projects = [
 
 function App() {
   return (
-    <main className="font-nunito">
+    <main className="font-nunito max-w-6xl mx-auto">
       <header className="text-gray-900 pt-8 md:pt-16 capitalize text-center lg:flex lg:align-middle justify-center mx-4">
         <div className="my-auto lg:grow">
-          <p className="text-3xl md:text-5xl">hector alvarez</p>
+          <p className="text-4xl md:text-5xl">hector alvarez</p>
           <p className="text-lg">full stack development & UX \ UI</p>
         </div>
         <img src={tmtnIMG} className="max-w-md m-auto w-full" />
@@ -51,14 +58,26 @@ function App() {
             <p className="text-sm">{project.description}</p>
             <p className="pb-2 text-xs text-white">tech stack: {project.techstack}</p>
             <div className="h-16 bg-gray-200 flex justify-around">
-              <img src={ghSVG} alt="github svg icon" className="py-2 px-6" />
-              <img src={figmaSVG} alt="figma svg icon" className="py-2 px-6" />
-              <img src={websiteSVG} alt="website svg icon" className="py-2 px-6" />
+              <img
+                src={ghSVG}
+                alt="github svg icon"
+                className="py-2 px-6 lg:hover:bg-white lg:hover:cursor-pointer"
+              />
+              <img
+                src={figmaSVG}
+                alt="figma svg icon"
+                className="py-2 px-6 lg:hover:bg-white lg:hover:cursor-pointer"
+              />
+              <img
+                src={websiteSVG}
+                alt="website svg icon"
+                className="py-2 px-6 lg:hover:bg-white lg:hover:cursor-pointer"
+              />
             </div>
           </div>
         );
       })}
-      <footer className="bg-gray-300 text-lg text-center">copyright 2022</footer>
+      <footer className="text-lg text-center p-4">copyright 2022</footer>
     </main>
   );
 }
